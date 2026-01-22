@@ -31,11 +31,11 @@ This project does not aim to bypass modern endpoint protection, but to demonstra
 ### Generate obfuscated shellcode
 ```bash
 python xor_obfuscator.py --input shellcode.bin --key deadbeef --output xored_shellcode.h
-
+```
 ## Compile loader (Windows)
-
+```c
 cl loader.c /O2 /MT user32.lib
-
+```
 ## Educational Context
 
 _This project is part of an educational assignment and focuses on understanding:_
