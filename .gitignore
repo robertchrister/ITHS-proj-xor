@@ -1,6 +1,21 @@
-.venv/
+# Python cache
 __pycache__/
 *.pyc
-*.bin
+*.pyo
+*.pyd
+
+# Pytest
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# Editor / OS
+.vscode/
+.DS_Store
+
+# Build artifacts
 *.exe
-*.out
+*.obj
+*.lib
