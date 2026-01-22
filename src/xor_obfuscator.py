@@ -1,15 +1,21 @@
 import argparse
 from xor_core import xor_bytes
 
-# tar emot en sträng bytes i retur
-# CLI-argument (argparse) kommer alltid in som strängar
-# xor funktionen tar in bytes
-# Detta kallas för separation of concerns (miktronivå)
+
 def parse_key(key: str) -> bytes:
-    # allow hex or ascii
-    # man vet inte om key är giltig hex eller text
-    # man skulle kunna använda flaggor här låter vi python prova
-    # strängen inte är giltig hex kasta ett undantag
+    """
+    Parse an XOR key provided via the command line.
+
+    The key may be provided either as:
+    - a hexadecimal string (e.g. "deadbeef"), or
+    - a regular ASCII/UTF-8 string.
+
+    The function always returns the key as a byte sequence
+    suitable for XOR operations.
+
+    :param key: XOR key as provided by the user
+    :return: Key converted to bytes
+    """
     try:
         return bytes.fromhex(key)
     except ValueError:
@@ -17,6 +23,19 @@ def parse_key(key: str) -> bytes:
 
 
 def main():
+    """
+    Entry point for the XOR obfuscation workflow.
+
+    This function:
+    - parses command-line arguments
+    - reads raw shellcode from disk
+    - applies XOR obfuscation using the provided key
+    - writes the result in the requested output format
+
+    No execution or deobfuscation occurs here; the function
+    strictly orchestrates data flow between components.
+    """
+    
     parser = argparse.ArgumentParser(
         description="XOR-obfuscate raw shellcode (offline)"
     )
