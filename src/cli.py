@@ -7,9 +7,10 @@ Command-line interface for XOR shellcode obfuscation.
 import argparse
 from pathlib import Path
 
-from xor_obfuscator.xor_core import xor_bytes
-from xor_obfuscator.io_utils import read_binary_file, write_binary_file
-from xor_obfuscator.formatters import to_c_array, to_python_bytes, to_raw_hex
+from src.key_utils import parse_key
+from src.xor_core import xor_bytes
+from src.io_utils import read_binary_file, write_binary_file
+from src.formatters import to_c_array, to_python_bytes, to_raw_hex
 
 def parse_args():
     parser = argparse.ArgumentParser(
@@ -50,7 +51,8 @@ def main():
 
     input_path = Path(args.input_file)
     output_path = Path(args.output_file)
-    key_bytes = args.key.encode("utf-8")
+    # key_bytes = args.key.encode("utf-8")
+    key_bytes = parse_key(args.key)
 
     data = read_binary_file(input_path)
     xored = xor_bytes(data, key_bytes)
